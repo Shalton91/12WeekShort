@@ -14,7 +14,7 @@ namespace _12WeekShort
         {
           
 
-            string CSVoutput = "Work Order,Parent Part,WIP QTY,Required Date,Promise Date,Revised Promise Date,Short Part,Short QTY,Short BOM Level,Short Part Description,Contracts\n";
+            string CSVoutput = "Work Order,Parent Part,WIP QTY,Promise Date,Revised Promise Date,Short Part,Short QTY,Short BOM Level,Short Part Description,Contracts\n";
 
             List<CSVLine> c = new List<CSVLine>();
             mtms.DataTable1DataTable WORD = new mtms.DataTable1DataTable();
@@ -46,9 +46,14 @@ namespace _12WeekShort
                 DateTime dthold = new DateTime(2020, 01, 01);
                 mtms.MISC_DATADataTable MISC = new mtms.MISC_DATADataTable();
                 mtmsTableAdapters.MISC_DATATableAdapter dtaMISC = new mtmsTableAdapters.MISC_DATATableAdapter();
-               
-
-                dtaMISC.Fill(MISC, site.ToString(), short.Parse(row.WORD1_REF.Substring(6, 2)), row.WORD1_REF.Substring(0, 6));
+                try
+                {
+                    dtaMISC.Fill(MISC, site.ToString(), short.Parse(row.WORD1_REF.Substring(6, 2)), row.WORD1_REF.Substring(0, 6));
+                }
+                catch
+                {
+                    continue;
+                }
                 if (MISC.Count > 0)
                 {
                     hold = m.WPQ43(row.WORDPART, int.Parse(row.WORDQTY_REQ.ToString()), int.Parse(row.WORDPATH.ToString()), MISC[0].MISCDATE_3);
@@ -56,7 +61,7 @@ namespace _12WeekShort
                 }
                 else
                 {
-                    hold = m.WPQ43(row.WORDPART, int.Parse(row.WORDQTY_REQ.ToString()), int.Parse(row.WORDPATH.ToString()), row.ORDSDATE_PROMISE);
+                    continue;
                 }
                 if (hold.Count > 0)
                 {   
@@ -72,14 +77,14 @@ namespace _12WeekShort
                             workOrder = row.WORD1_REF,
                             parentPart = row.WORDPART,
                             wipQTY = double.Parse(row.WORDQTY_REQ.ToString()),
-                            dateRequired = row.ORDSDATE_REQUEST,
-                            dateProm = row.ORDSDATE_PROMISE,
+                            //dateRequired = row.ORDSDATE_REQUEST,
+                            dateProm = row.WORDDATE_REQ,
                             dateRevProm = dthold,
                             shortPart = g[1],
                             shortQTY = double.Parse(g[3]),
                             shortBOMLevel = int.Parse(g[0]),
                             shortPartDesc = g[2].Replace(",", " "),
-                            contracts = row.ORDS5_SAL_BUY,
+                            //contracts = row.ORDS5_SAL_BUY,
                             buyer = ""
 
                         }) ;                     
@@ -118,11 +123,11 @@ namespace _12WeekShort
         }
         public static string csvlinesToString(List<CSVLine> c)
         {
-            string output = "Work Order,Parent Part,WIP QTY,Required Date,Promise Date,Revised Promise Date,Short Part,Short QTY,Short BOM Level,Short Part Description,Contracts,Buyer\n";
+            string output = "Work Order,Parent Part,WIP QTY,Promise Date,Revised Promise Date,Short Part,Short QTY,Short BOM Level,Short Part Description,Contracts,Buyer\n";
             foreach (CSVLine l in c)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}\n",
+                sb.AppendFormat("{0},{1},{2},{4},{5},{6},{7},{8},{9},{10},{11}\n",
                     l.workOrder, l.parentPart, l.wipQTY, l.dateRequired.ToShortDateString(), l.dateProm.ToShortDateString(), l.dateRevProm.ToShortDateString(),
                     l.shortPart, l.shortQTY, l.shortBOMLevel, l.shortPartDesc, l.contracts, l.buyer);
                 output +=sb.ToString() ;
