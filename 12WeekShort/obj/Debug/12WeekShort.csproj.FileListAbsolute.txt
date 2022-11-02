@@ -16,3 +16,9 @@ C:\Users\sean.halton\source\repos\12WeekShort\12WeekShort\bin\Debug\12WeekShort.
 C:\Users\sean.halton\source\repos\12WeekShort\12WeekShort\bin\Debug\12WeekShort.application
 C:\Users\sean.halton\source\repos\12WeekShort\12WeekShort\obj\Debug\12WeekShort.exe.manifest
 C:\Users\sean.halton\source\repos\12WeekShort\12WeekShort\obj\Debug\12WeekShort.application
+C:\Users\shalt\OneDrive\Documents\GitHub\12WeekShort\12WeekShort\obj\Debug\12WeekShort.csproj.AssemblyReference.cache
+C:\Users\shalt\OneDrive\Documents\GitHub\12WeekShort\12WeekShort\obj\Debug\12WeekShort.csproj.SuggestedBindingRedirects.cache
+C:\Users\shalt\OneDrive\Documents\GitHub\12WeekShort\12WeekShort\obj\Debug\12WeekShort.csproj.ResolveComReference.cache
+C:\Users\shalt\OneDrive\Documents\GitHub\12WeekShort\12WeekShort\obj\Debug\12WeekShort.csproj.CoreCompileInputs.cache
+C:\Users\shalt\OneDrive\Documents\GitHub\12WeekShort\12WeekShort\obj\Debug\12WeekShort.exe
+C:\Users\shalt\OneDrive\Documents\GitHub\12WeekShort\12WeekShort\obj\Debug\12WeekShort.pdb
